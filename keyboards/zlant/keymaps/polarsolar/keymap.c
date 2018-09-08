@@ -23,6 +23,23 @@ extern keymap_config_t keymap_config;
 
 #define RGB_RST F(0)
 
+// Tap Dance Declarations
+enum {
+  TD_U_H = 0,
+  TD_D_E,
+  TD_4,
+  TD_N
+};
+
+// Tap Dance Definitions
+qk_tap_dance_action_t tap_dance_actions[] = {
+  // Tap once for Page Up or Page Down; tap twice for Home or End
+  [TD_U_H] = ACTION_TAP_DANCE_DOUBLE(KC_PGUP, KC_HOME),
+  [TD_D_E] = ACTION_TAP_DANCE_DOUBLE(KC_PGDN, KC_END),
+  [TD_4] = ACTION_TAP_DANCE_DOUBLE(KC_4, KC_F4),
+  [TD_N] = ACTION_TAP_DANCE_DOUBLE(KC_GRV, KC_NLCK)
+};
+
 // Useful defines
 #define _______ KC_TRNS
 #define XXXXXXX KC_NO
