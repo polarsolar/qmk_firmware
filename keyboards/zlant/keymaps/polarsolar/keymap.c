@@ -156,9 +156,9 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
   }
 }
 
-const uint16_t PROGMEM test_combo[] = {KC_TAB, KC_QUOT, COMBO_END};
-combo_t key_combos[COMBO_COUNT] = {COMBO(test_combo, KC_ESC)};
-
+// const uint16_t PROGMEM test_combo[] = {KC_TAB, KC_QUOT, COMBO_END};
+// combo_t key_combos[COMBO_COUNT] = {COMBO(test_combo, KC_ESC)};
+// Commenting this out for now because I still need to set up my users directory.
 // See: https://github.com/qmk/qmk_firmware/blob/master/keyboards/handwired/promethium/keymaps/priyadi/keymap.c
 
 // Note on combos. Need to define the COMBO_TERM in config.h, because the default in the following file
