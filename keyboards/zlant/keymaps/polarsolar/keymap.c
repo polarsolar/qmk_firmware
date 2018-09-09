@@ -29,7 +29,8 @@ enum {
   TD_U,
   TD_R,
   TD_N,
-  TD_W
+  TD_W,
+  TD_S,
 };
 
 // Tap Dance Definitions
@@ -40,7 +41,8 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   [TD_U] = ACTION_TAP_DANCE_DOUBLE(KC_UP, KC_PGUP),
   [TD_R] = ACTION_TAP_DANCE_DOUBLE(KC_RGHT, KC_END),
   [TD_N] = ACTION_TAP_DANCE_DOUBLE(KC_GRV, KC_NLCK),
-  [TD_W] = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, KC_RBRC)
+  [TD_W] = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, KC_RBRC),
+  [TD_S] = ACTION_TAP_DANCE_DOUBLE(KC_SLSH, KC_EQL),
 };
 
 // Useful defines
@@ -57,18 +59,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * ,-----------------------------------------------------------------------------------.
    * |TabEsc|   '  |   ,  |   .  |   P  |   Y  |   F  |   G  |   C  |   R  |   L  | / =  |  //Tap for Tab; chord Tab with "'" for Esc //Tap for /; double-tap for =; chord / with "L" for Del
     * |------+------+------+------+------+-------------+------+------+------+------+------|
-     * |LO_ESC|   A  |   O  |   E  |   U  |   I  |   D  |   H  |   T  |   N  |   S  |Ent++!|  //Tap for Esc; hold for MO(_LOWER) //Tap for Enter; hold for ???
+     * |LO_ESC|   A  |   O  |   E  |   U  |   I  |   D  |   H  |   T  |   N  |   S  |Ent++!|  //Tap for Esc; hold for MO(_LOWER) //Tap for Enter; hold for ??
       * |------+------+------+------+------+------|------+------+------+------+------+------|
-       * |ShiftR|   ;  |   Q  |   J  |   K  |   X  |   B  |   M  |   W  |   V  |   Z  |ShiftU|  //Tap=Shift; double-tap=RAISE
+       * |ShiftR|   ;  |   Q  |   J  |   K  |   X  |   B  |   M  |   W  |   V  |   Z  |ShiftR|  //Tap=Shift; double-tap=RAISE
         * |------+------+------+------+------+------+------+------+------+------+------+------|
          * | Ctrl |CTLALT| OOPS |  Alt | Bksp |CENTER|  Spc |TT(1) | TD_L | TD_D | TD_U | TD_R |  //Tap for del; hold for MO(_FL) //Tap-toggle Qwerty
          * `-----------------------------------------------------------------------------------'
    */
 
 [_DVORAK] = LAYOUT (
-  KC_TAB,  KC_QUOT, KC_COMM, KC_DOT,  F(1),    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_SLSH,
+  KC_TAB,  KC_QUOT, KC_COMM, KC_DOT,  F(1),    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    TD(TD_S),
   LO_ESC,  KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S,    KC_ENT,
-  KC_LSFT, KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    KC_RSFT,
+  KC_RSFT, KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    KC_RSFT,
   KC_LCTL, CTL_ALT, OOPS,    KC_LALT, KC_BSPC, CENTER,  KC_SPC,  TT(1),   TD(TD_L),TD(TD_D),TD(TD_U),TD(TD_R)),
 
   /* Keymap _QWERTY: Qwerty layer. Straight map back from Dvorak. Only for use as fake-Dvorak on computers that have Dvorak enabled on the OS.
@@ -77,7 +79,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * |------+------+------+------+------+-------------+------+------+------+------+------|
      * |LO_ESC|   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |Ent++!|  //Tap for Esc; hold for MO(_LOWER) //Tap for Enter; hold for ???
       * |------+------+------+------+------+------+------+------+------+------+------+------|
-       * |ShiftR|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |ShiftU|  //Tap or single hold = Shift; double-tap=RAISE
+       * |ShiftR|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |ShiftR|  //Tap or single hold = Shift; double-tap=RAISE
         * |------+------+------+------+------+------+------+------+------+------+------+------|
          * | Ctrl |CTLALT| OOPS | Alt  | Bksp |CENTER|  Spc |TT(1) | TD_L | TD_D | TD_U | TD_R |  //Tap for del; hold for MO(FL) //Tap-toggle Qwerty
          * `-----------------------------------------------------------------------------------'
@@ -85,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_QWERTY] = LAYOUT (
   KC_TAB,  KC_Q,    KC_W,    KC_E,    F(2),    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC,
   LO_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_ENT,
-  KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+  KC_RSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
   KC_LCTL, CTL_ALT, OOPS,    KC_LALT, KC_BSPC, CENTER,  KC_SPC,  TT(1),   TD(TD_L),TD(TD_D),TD(TD_U),TD(TD_R)),
 
   /* Layer _RAISE
@@ -129,7 +131,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       * |------+------+------+------+------+------|------+------+------+------+------+------|
        * |Shift |  F7  |  F8  |  F9  |  F10 |  F11 |  F12 |      |      |      |      |      |
         * |------+------+------+------+------+------+------+------+------+------+------+------|
-         * |      |      |      |      | Bksp |  Del |  Spc |      |      |      |      |      |
+         * |      |      |      |      | Bksp |  Del |  Spc |      |      | VAD  | VAI  |      |
          * `-----------------------------------------------------------------------------------'
     */
   /* Keymap _FL: Function Layer.
@@ -138,7 +140,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    TD(TD_W),
   TD(TD_N),KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   _______, _______, _______, _______, KC_MINS,
   KC_LSFT, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______, _______, _______, _______, _______,
-  _______, _______, _______, _______, KC_BSPC, _______, KC_SPC,  _______, _______, _______, _______, _______),
+  _______, _______, _______, _______, KC_BSPC, KC_DEL,  KC_SPC,  _______, _______, RGB_VAD, RGB_VAI, _______),
 
   /* Keymap _CL: Control layer.  Layer indicator color: red.
    * ,-----------------------------------------------------------------------------------.
@@ -159,10 +161,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, _______, _______, _______, _______, KC_SPC,  _______, RGB_HUD, RGB_SAD, RGB_SAI, RGB_HUI),
 
 };
-
-/* This is a list of user defined functions. F(N) corresponds to item N
-   of this list.
- */
 
 const uint16_t PROGMEM fn_actions[] = {
   [0] = ACTION_FUNCTION(0),  // Calls action_function()
