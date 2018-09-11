@@ -4,6 +4,7 @@
 #include "action_layer.h"
 #include "eeconfig.h"
 #include "config.h"
+#include "polarsolar.h"
 
 extern keymap_config_t keymap_config;
 
@@ -19,21 +20,6 @@ extern keymap_config_t keymap_config;
 
 #define RGB_RST F(0)
 
-// Tap Dance Declarations
-enum {
-  TD_U_H = 0,
-  TD_D_E,
-  TD_N
-};
-
-// Tap Dance Definitions
-qk_tap_dance_action_t tap_dance_actions[] = {
-  // Tap once for Page Up or Page Down; tap twice for Home or End
-  [TD_U_H] = ACTION_TAP_DANCE_DOUBLE(KC_PGUP, KC_HOME),
-  [TD_D_E] = ACTION_TAP_DANCE_DOUBLE(KC_PGDN, KC_END),
-  [TD_N] = ACTION_TAP_DANCE_DOUBLE(KC_GRV, KC_NLCK)
-};
-
 // Useful defines
 #define _______ KC_TRNS
 #define XXXXXXX KC_NO
@@ -46,7 +32,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* Keymap _DVORAK: Base layer (default layer), but other layers can also be reached from the Qwerty layer.
    * Layer indicator color: purple-ish (to match keyboard case).
    * ,-----------------------------------------------------------------------------------------------------------------------.   ,-------.
-   * | Esc/` |   1   |   2   |   3   | TD_4  |   5   |   6   |   7   |   8   |   9   |   0   |   [   |   ]   |  Bksp |  Del  |   |TD_U_H |
+   * | Esc/` |   1   |   2   |   3   | F(1)  |   5   |   6   |   7   |   8   |   9   |   0   |   [   |   ]   |  Bksp |  Del  |   |TD_U_H |
    * |-----------------------------------------------------------------------------------------------------------------------|   |-------|
    * | Tab       |   '   |   ,   |   .   |   P   |   Y   |   F   |   G   |   C   |   R   |   L   |   /   |    =   |    \     |   |TD_D_E |
    * |-----------------------------------------------------------------------------------------------------------------------|   `-------'
@@ -63,11 +49,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,  KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_SLSH, KC_EQL,  KC_BSLS,                   TD(TD_D_E),
   FN_CAPS, KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S,    KC_MINS, XXXXXXX, KC_ENT,
   KC_LSFT, XXXXXXX, KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    KC_RSFT, TD(TD_N),         KC_UP,
-  KC_LCTL, CTL_ALT, OOPS,    KC_LALT,                   KC_BSPC, KC_SPC,                    TT(1),   TT(2),   MO(3),   KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT),
+  KC_LCTL, CTL_ALT, OOPS,    OSM(MOD_LALT),             KC_BSPC, KC_SPC,                    TT(1),   TT(2),   MO(3),   KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT),
 
   /* Keymap _QWERTY: Qwerty layer.  Layer indicator color: green.
    * ,-----------------------------------------------------------------------------------------------------------------------.   ,-------.
-   * | Esc/` |   1   |   2   |   3   |  TD_4 |   5   |   6   |   7   |   8   |   9   |   0   |   -   |   =   |  Bksp |  Del  |   |TD_U_H |
+   * | Esc/` |   1   |   2   |   3   |  F(1) |   5   |   6   |   7   |   8   |   9   |   0   |   -   |   =   |  Bksp |  Del  |   |TD_U_H |
    * |-----------------------------------------------------------------------------------------------------------------------|   |-------|
    * | Tab       |   Q   |   W   |   E   |   R   |   T   |   Y   |   U   |   I   |   O   |   P   |   [   |    ]   |    \     |   |TD_D_E |
    * |-----------------------------------------------------------------------------------------------------------------------|   `-------'
@@ -83,7 +69,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_BSLS,                   TD(TD_D_E),
   FN_CAPS, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, XXXXXXX, KC_ENT,
   KC_LSFT, XXXXXXX, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT, TD(TD_N),         KC_UP,
-  KC_LCTL, CTL_ALT, OOPS,    KC_LALT,                   KC_BSPC, KC_SPC,                    TT(1),   TT(2),   MO(3),   KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT),
+  KC_LCTL, CTL_ALT, OOPS,    OSM(MOD_LALT),             KC_BSPC, KC_SPC,                    TT(1),   TT(2),   MO(3),   KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT),
 
   /* Keymap _NM: Numpad and mouse layer, but the mouse isn't active yet (and isn't enabled yet).  Layer indicator color: yellow-ish.
    * ,-----------------------------------------------------------------------------------------------------------------------.   ,-------.
